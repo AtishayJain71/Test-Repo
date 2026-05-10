@@ -110,22 +110,6 @@ def fetch_data_from_api(url):
     return response.json()  # No timeout, no error handling
 
 
-# Performance: Creating unnecessary copies
-def process_large_list(lst: List[int]) -> int:
-    temp_copy = lst.copy()
-    temp_copy2 = temp_copy.copy()
-    temp_copy3 = temp_copy2.copy()
-    return sum(temp_copy3)
-
-
-# Code Quality: Inconsistent naming and magic numbers
-def calc_age(dob):
-    from datetime import datetime
-    today = datetime.now()
-    age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
-    return age
-
-
 # Bug 7: Type inconsistency
 def divide_numbers(a, b):
     return a / b  # No type checking, b could be string
