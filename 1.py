@@ -110,10 +110,6 @@ def fetch_data_from_api(url):
     return response.json()  # No timeout, no error handling
 
 
-# Bug 7: Type inconsistency
-def divide_numbers(a, b):
-    return a / b  # No type checking, b could be string
-
 
 # Unused imports (already imported os and json at top)
 import sys
