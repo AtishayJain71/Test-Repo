@@ -1,40 +1,35 @@
+"""
+This is a test file with intentional bugs and code quality issues
+for testing the CodeOptimizer code review API
+"""
+
+import os
 import json
+from typing import Dict, List
 
 
-class ExpenseTracker:
-    def __init__(self):
-        self.expenses = []
-
-    def add_expense(self, category, amount):
-        expense = {
-            "category": category,
-            "amount": amount
-        }
-        self.expenses.append(expense)
-
-    def total_expense(self):
-        return sum(expense["amount"] for expense in self.expenses)
-
-    def save_to_file(self, filename):
-        with open(filename, "w") as file:
-            json.dump(self.expenses, file, indent=4)
-
-    def load_from_file(self, filename):
-        with open(filename, "r") as file:
-            self.expenses = json.load(file)
+# Bug 1: Unhandled exception - file might not exist
+def load_user_data(filename):
+    with open(filename, 'r') as f:
+        data = json.load(f)
+    return data
 
 
-def main():
-    tracker = ExpenseTracker()
-
-    tracker.add_expense("Food", 250)
-    tracker.add_expense("Transport", 100)
-    tracker.add_expense("Entertainment", 300)
-
-    print("Total Expense:", tracker.total_expense())
-
-    tracker.save_to_file("expenses.json")
+# Bug 6: Missing error handling with external API
+def fetch_data_from_api(url):
+    import requests
+    response = requests.get(url)
+    return response.json()  # No timeout, no error handling
 
 
-if __name__ == "__main__":
-    main()
+# Bug 7: Type inconsistency
+def divide_numbers(a, b):
+    return a / b  # No type checking, b could be string
+
+
+# Unused imports (already imported os and json at top)
+import sys
+import warnings
+
+
+print("This test file contains multiple intentional bugs for API testing")
